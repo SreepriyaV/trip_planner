@@ -536,6 +536,7 @@ module.exports={"$version":8,"$root":{"version":{"required":true,"type":"enum","
 
 const mapboxgl = __webpack_require__(0);
 const buildMarker = __webpack_require__(3);
+const fetch=__webpack_require__(4);
 
 mapboxgl.accessToken = "pk.eyJ1IjoiZ3JhY2Vob3BwZXIxNzA5IiwiYSI6ImNqOGJxcjF0ajAwdmcycXA3czU1OTA0ODUifQ.B9FFZRTrhXtxIFuFuXqZQQ";
 
@@ -548,6 +549,7 @@ const map = new mapboxgl.Map({
 
 const marker = buildMarker("activities", [-74.009, 40.705]);
 marker.addTo(map);
+
 
 
 /***/ }),
@@ -603,6 +605,69 @@ const buildMarker = (type, coords) => {
 
 module.exports = buildMarker;
 
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+
+fetch('/api/')
+.then(res=> res.json())
+.then(data=> {
+    var activity= data.activity;
+    var hotel=data.hotel;
+    var restaurant= data.restaurant;
+
+    //console.log(data);
+//    console.log( data);
+//   var arr= Object.keys(data);
+//   console.log(data[arr[0]]);
+
+//     for(var i=0;i<arr.length;i++)
+//         {
+//             for(var j=0;j<data[arr[i]].length;j++)
+//                 {
+//                  var newoption = document.createElement("option");
+//         newoption.append(data[arr[i]][j].name);
+//         console.log(data[i][j]);
+//         document.getElementById(data[i] + "-choices").append(newoption);
+//                 }
+//         }
+
+
+
+  // console.log(hotel[0].name);
+
+for(var i=0;i<hotel.length;i++)
+    {
+        console.log(hotel[i].name);
+
+        var newoption = document.createElement("option");
+        newoption.append(hotel[i].name);
+        document.getElementById("hotels-choices").append(newoption);
+    }
+
+    for(var i=0;i<restaurant.length;i++)
+        {
+            var newoption = document.createElement("option");
+        newoption.append(restaurant[i].name);
+        document.getElementById("restaurants-choices").append(newoption);
+
+        }
+
+        for(var i=0;i<activity.length;i++)
+        {
+            var newoption = document.createElement("option");
+        newoption.append(activity[i].name);
+        document.getElementById("activities-choices").append(newoption);
+
+        }
+
+})
+.catch(console.error);
+
+
+//document.getElementById('hotel-add').onclick(function)
 
 /***/ })
 /******/ ]);

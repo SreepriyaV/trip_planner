@@ -1,5 +1,6 @@
 const mapboxgl = require("mapbox-gl");
 const buildMarker = require("./marker.js");
+const fetch=require('./fetch.js');
 
 mapboxgl.accessToken = "pk.eyJ1IjoiZ3JhY2Vob3BwZXIxNzA5IiwiYSI6ImNqOGJxcjF0ajAwdmcycXA3czU1OTA0ODUifQ.B9FFZRTrhXtxIFuFuXqZQQ";
 
@@ -12,3 +13,4 @@ const map = new mapboxgl.Map({
 
 const marker = buildMarker("activities", [-74.009, 40.705]);
 marker.addTo(map);
+
