@@ -7,6 +7,7 @@ var path = require("path");
 var db = require("./models").db;
 
 var app = express();
+//var router=require('./router.js').router;
 
 // logging and body-parsing
 app.use(morgan('dev'));
@@ -16,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, "..", "public")));
+
+
+app.use('/api',require('./router.js'));
 
 // failed to catch req above means 404, forward to error handler
 app.use(function(req, res, next) {
@@ -36,7 +40,7 @@ var port = 3000;
 app.listen(port, function() {
   console.log("The server is listening closely on port", port);
   db
-    .sync({force:true})
+    .sync()
     .then(function() {
       console.log("Synchronated the database");
     })
@@ -44,3 +48,5 @@ app.listen(port, function() {
       console.error("Trouble right here in River City", err, err.stack);
     });
 });
+
+module.exports=app;

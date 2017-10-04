@@ -10,13 +10,13 @@ var Hotel= db.define('hotel',{
         allowNull:false
     },
     num_stars:{
-        type: Sequelize.FLOAT(1,5)
+        type: Sequelize.FLOAT
     },
     amenities:{
         type:Sequelize.STRING,
         get: function()
         {
-            return this.getDataValues('amenities').join(', ');
+            return this.getDataValue('amenities').concat(', ');
         }
     }
    
@@ -44,7 +44,7 @@ var Restaurant=db.define('restaurant',{
         type:Sequelize.STRING,
         get: function()
         {
-            return this.getDataValues('cuisine').join(', ');
+            return this.getDataValue('cuisine').concat(', ');
         }
     },
     price:{
