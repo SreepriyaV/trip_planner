@@ -10,8 +10,8 @@ var Promise = require('bluebird');
 module.exports=router;
 
 router.get('/',(req,res,next)=>{
-   
-  return Promise.all([Hotel.findAll(),Restaurant.findAll(),Activity.findAll()])
+   //{ include: [{ all: true }] } : includes the places 
+  return Promise.all([Hotel.findAll({ include: [{ all: true }] }),Restaurant.findAll({ include: [{ all: true }] }),Activity.findAll({ include: [{ all: true }] })])
   .spread((hotel,restaurant,activity)=>{
       res.json({hotel: hotel, restaurant:restaurant,activity:activity});  //sending multiple data 
   });
